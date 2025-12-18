@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <!-- Metadata, OpenGraph and Schema.org -->
+
+
+
+
+<!-- Standard metadata -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>
+  
+  
+    Yekun Chai
+  
+</title>
+<meta name="author" content="Yekun Chai">
+<meta name="description" content="cyk's homepage.
+">
+
+  <meta name="keywords" content="AI Research, LLM, Yekun Chai">
+
+
+
+
+
+
+
+
+
+
+<!-- Bootstrap & MDB -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+<!-- Bootstrap Table -->
+
+
+<!-- Fonts & Icons -->
+<link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5">
+<link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap">
+
+<!-- Code Syntax Highlighting -->
+<link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light">
+
+
+
+<!-- Styles -->
+
+<!-- pseudocode -->
+
+
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%8C%80&lt;/text&gt;&lt;/svg&gt;">
+
+<link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e">
+<link rel="canonical" href="https://cyk1337.github.io/">
+
+<!-- Dark Mode -->
+<script src="/assets/js/theme.js?9a0c749ec5240d9cda97bc72359a72c0"></script>
+
+  <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark">
+  <script>
+    initTheme();
+  </script>
+
+
+<!-- GeoJSON support via Leaflet -->
+
+
+<!-- diff2html -->
+
+
+
+
+
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+    <!-- Header -->
+    <header>
+  <!-- Nav Bar -->
+  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation">
+    <div class="container">
+      
+        <!-- Social Icons -->
+        <div class="navbar-brand social">
+  <a href="mailto:%63%68%61%69%79%65%6B%75%6E@%67%6D%61%69%6C.%63%6F%6D" title="email"><i class="fa-solid fa-envelope"></i></a>
+
+
+
+
+
+  <a href="https://scholar.google.com/citations?user=P0NRuRYAAAAJ" title="Google Scholar" rel="external nofollow noopener" target="_blank"><i class="ai ai-google-scholar"></i></a>
+
+
+
+
+
+
+
+
+
+
+  <a href="https://github.com/cyk1337" title="GitHub" rel="external nofollow noopener" target="_blank"><i class="fa-brands fa-github"></i></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <a href="/feed.xml" title="RSS Feed"><i class="fa-solid fa-square-rss"></i></a>
+
+
+</div>
+      
+      <!-- Navbar Toggle -->
+      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar top-bar"></span>
+        <span class="icon-bar middle-bar"></span>
+        <span class="icon-bar bottom-bar"></span>
+      </button>
+
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav ml-auto flex-nowrap">
+          
+
+          <!-- About -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/">about
+              
+                <span class="sr-only">(current)</span>
+              
+            </a>
+          </li>
+
+          <!-- Other pages -->
+          
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+              
+                
+                <li class="nav-item ">
+                  
+                  <a class="nav-link" href="/publications/">publications
+                    
+                  </a>
+                </li>
+              
+            
+          
+            
+              
+                
+                <li class="nav-item ">
+                  
+                  <a class="nav-link" href="/notes/">notes
+                    
+                  </a>
+                </li>
+              
+            
+          
+          
+            <!-- Search -->
+            <li class="nav-item">
+              <button id="search-toggle" title="Search" onclick="openSearchModal()">
+                <span class="nav-link">ctrl k <i class="ti ti-search"></i></span>
+              </button>
+            </li>
+          
+          
+            <!-- Toogle theme mode -->
+            <li class="toggle-container">
+              <button id="light-toggle" title="Change theme">
+                <i class="ti ti-sun-moon" id="light-toggle-system"></i>
+                <i class="ti ti-moon-filled" id="light-toggle-dark"></i>
+                <i class="ti ti-sun-filled" id="light-toggle-light"></i>
+              </button>
+            </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+    <!-- Scrolling Progress Bar -->
+    <progress id="progress" value="0">
+      <div class="progress-container">
+        <span class="progress-bar"></span>
+      </div>
+    </progress>
+  
+</header>
+
+
+    <!-- Content -->
+    <div class="container mt-5" role="main">
+      
+        <div class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+        Yekun 
+        
+        <span class="font-weight-bold">Chai</span> 
+      
+    </h1>
+    <p class="desc"><a href="http://research.baidu.com" target="_blank" rel="external nofollow noopener">  <img src="https://img.shields.io/badge/-ERNIE-555?style=flat&amp;labelColor=2932E1&amp;logo=baidu&amp;logoColor=white" alt="Baidu ERNIE" align="top"></a></p>
+  </header>
+
+  <article>
+    
+      <div class="profile float-right">
+        
+          
+          
+          
+          
+
+<figure>
+  <picture>
+    <!-- Auto scaling with imagemagick -->
+    <!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    -->
+    
+      <source class="responsive-img-srcset" srcset="/assets/img/london-480.webp 480w,/assets/img/london-800.webp 800w,/assets/img/london-1400.webp 1400w," sizes="(min-width: 930px) 270.0px, (min-width: 576px)
+      30vw, 95vw" type="image/webp">
+    
+    <img src="/assets/img/london.jpg?0d095b7e05ed6c66450568973ade4380" class="img-fluid z-depth-1 rounded-circle" width="100%" height="auto" alt="london.jpg" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+  </source></picture>
+
+  
+</figure>
+
+        
+        
+          <div class="more-info">
+<p>
+  <small>
+    <b>Contact:</b><br>chaiyekun (at) gmail.com
+  </small>
+</p>
+</div>
+        
+      </div>
+    
+
+    <div class="clearfix">
+<style>
+
+/* Light theme */
+html[data-theme="light"] .clearfix a:hover {
+  text-decoration: blink underline wavy;
+  color: rgb(19, 156, 72);
+  text-underline-offset: 2px;
+}
+
+html[data-theme="light"] .clearfix a {
+  text-decoration: none;
+  color: #333333;
+  /* color: rgb(228, 76, 5); */
+  /* color: rgb(71, 71, 71); */
+}
+
+html[data-theme="light"] .clearfix a#cur {
+  text-decoration: blink underline wavy;
+  color: #00369f;
+  text-underline-offset: 4px;
+}
+
+html[data-theme="light"] .clearfix a#cur:hover {
+  color: rgb(19, 156, 72); /* Change color to green on hover */
+}
+
+/* Dark theme */
+html[data-theme="dark"] .clearfix a:hover {
+  text-decoration: blink underline wavy;
+  color: rgb(19, 156, 72);
+  text-underline-offset: 2px;
+}
+
+html[data-theme="dark"] .clearfix a {
+  text-decoration: none;
+  color:rgb(206, 207, 208);
+  /* color: rgb(228, 76, 5); */
+  /* color: rgb(71, 71, 71); */
+}
+
+html[data-theme="dark"] .clearfix a#cur {
+  text-decoration: blink underline wavy;
+  color: #2698ba;
+  text-underline-offset: 4px;
+}
+
+html[data-theme="dark"] .clearfix a#cur:hover {
+  color: rgb(19, 156, 72); /* Change color to green on hover */
+}
+/* end */
+
+.nomargin {
+  padding 0;
+  margin 0;
+}
+
+.compact-table th {
+    width: 15%; /* Reduce column width */
+    white-space: nowrap; /* Prevent line breaks */
+    padding-right: 10px; /* Reduce spacing between columns */
+}
+
+.compact-table td {
+    width: auto;
+    padding-left: 5px; /* Reduce left padding */
+}
+
+
+</style>
+
+<p>I am a Staff Researcher at <a href="https://nlp.baidu.com/" rel="external nofollow noopener" target="_blank">Baidu NLP</a> on the <a href="https://en.wikipedia.org/wiki/Ernie_Bot" rel="external nofollow noopener" target="_blank">ERNIE</a> team.
+<!-- <a id="cur" href="https://en.wikipedia.org/wiki/Ernie_Bot">ERNIE</a>  --></p>
+
+<p>My research focuses on foundation models, spanning pre-training, post-training, and reasoning. 
+I am particularly interested in efficient scaling paradigms, the training dynamics of large-scale models, and reinforcement learning–based methods.</p>
+
+<p><em>I welcome collaboration and research discussions.</em></p>
+
+</div>
+
+    <!-- News -->
+    
+      <h2>
+        <a href="/news/" style="color: inherit">news</a>
+      </h2>
+      <div class="news">
+  
+    
+    <div class="table-responsive" style="max-height: 60vw">
+      <table class="table table-sm table-borderless">
+        
+        
+        
+          <tr>
+            <th scope="row" style="width: 20%">Aug 21, 2025</th>
+            <td>
+              
+                Four papers have been accepted to EMNLP 2025 &amp; Findings. <img class="emoji" title=":bear:" alt=":bear:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f43b.png" height="20" width="20">
+ <!-- [[Code]](https://github.com/ernie-research/CD-RLHF/) -->
+<!-- :smile: :star: :sparkles: :boom: -->
+
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <th scope="row" style="width: 20%">May 16, 2025</th>
+            <td>
+              
+                One paper on <a href="https://aclanthology.org/2025.acl-long.1146/" rel="external nofollow noopener" target="_blank">curiosity-driven RLHF</a> has been accepted to ACL 2025. 
+<!-- :bear: -->
+ <!-- [[Code]](https://github.com/ernie-research/CD-RLHF/) -->
+<!-- :smile: :star: :sparkles: :boom: -->
+
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <th scope="row" style="width: 20%">Jan 23, 2025</th>
+            <td>
+              
+                One paper on <a href="https://openreview.net/pdf?id=WWXjMYZxfH" rel="external nofollow noopener" target="_blank">macro action RLHF</a> has been accepted to ICLR 2025<img class="emoji" title=":bear:" alt=":bear:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f43b.png" height="20" width="20">. Dive into our <a href="https://openreview.net/forum?id=WWXjMYZxfH" rel="external nofollow noopener" target="_blank">research</a> and <a href="https://github.com/ernie-research/MA-RLHF/" rel="external nofollow noopener" target="_blank">code</a> now! <img class="emoji" title=":fire:" alt=":fire:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f525.png" height="20" width="20">
+<!-- :smile: :star: :sparkles: :boom: -->
+
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <th scope="row" style="width: 20%">Sep 21, 2024</th>
+            <td>
+              
+                Our papers on <a href="https://aclanthology.org/2024.emnlp-main.182" rel="external nofollow noopener" target="_blank">PixelGPT</a>, <a href="https://aclanthology.org/2024.emnlp-main.183" rel="external nofollow noopener" target="_blank">GPTfluence</a>, and <a href="https://aclanthology.org/2024.findings-emnlp.86" rel="external nofollow noopener" target="_blank">TKEval</a> have been accepted to EMNLP 2024 &amp; Findings. <img class="emoji" title=":bear:" alt=":bear:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f43b.png" height="20" width="20">
+
+<!-- :smile: -->
+
+              
+            </td>
+          </tr>
+        
+          <tr>
+            <th scope="row" style="width: 20%">May 02, 2024</th>
+            <td>
+              
+                One paper on <a href="https://icml.cc/virtual/2024/poster/32996" rel="external nofollow noopener" target="_blank">GiLOT</a>, an XAI approach for LLMs, has been accepted to ICML 2024. <img class="emoji" title=":snowflake:" alt=":snowflake:" src="https://github.githubassets.com/images/icons/emoji/unicode/2744.png" height="20" width="20">
+
+<!-- :smile: -->
+
+              
+            </td>
+          </tr>
+        
+      </table>
+    </div>
+  
+</div>
+
+    
+
+    <!-- Latest posts -->
+    
+
+    <!-- Selected papers -->
+    
+      <h2>
+        <a href="/publications/" style="color: inherit">selected publications</a>
+      </h2>
+      <div class="publications">
+  <ol class="bibliography">
+<li>
+<div class="row">
+  
+    <div class="col col-sm-2 abbr">
+          <abbr class="badge rounded">ICLR</abbr>
+      
+      
+    </div>
+  
+
+  <!-- Entry bib key -->
+  <div id="chai2025marlhf" class="col-sm-8">
+    <!-- Title -->
+    <div class="title">MA-RLHF: Reinforcement Learning from Human Feedback with Macro Actions</div>
+    <!-- Author -->
+    <div class="author">
+      
+
+      
+      <em>Yekun
+            Chai<sup>*†</sup></em>, <a href="https://scholar.google.com/citations?user=zmLU3x0AAAAJ" rel="external nofollow noopener" target="_blank">Haoran
+              Sun<sup>*^</sup></a>, <a href="https://www.cs.ubc.ca/~hgfang/" rel="external nofollow noopener" target="_blank">Huang
+              Fang</a>, <a href="https://scholar.google.com/citations?user=fUkS6pAAAAAJ" rel="external nofollow noopener" target="_blank">Shuohuan
+              Wang</a>, and
+        <span class="more-authors" title="click to view 2 more authors" onclick="
+              var element = $(this);
+              element.attr('title', '');
+              var more_authors_text = element.text() == '2 more authors' ? 'Yu Sun, Hua Wu' : '2 more authors';
+              var cursorPosition = 0;
+              var textAdder = setInterval(function(){
+                element.html(more_authors_text.substring(0, cursorPosition + 1));
+                if (++cursorPosition == more_authors_text.length){
+                  clearInterval(textAdder);
+                }
+            }, '10');
+          ">2 more authors</span>
+      
+      
+        <i class="fa-solid fa-circle-info ml-1" data-toggle="popover" data-placement="top" data-html="true" data-content="† Project lead">
+        </i>
+      
+    </div>
+
+    <!-- Journal/Book title and date -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="periodical">
+      <em>In The Thirteenth International Conference on Learning Representations</em>,  2025
+    </div>
+    <div class="periodical">
+      
+    </div>
+
+    <!-- Links/Buttons -->
+    <div class="links">
+      <!--
+      
+      -->
+      
+      
+      
+      
+      
+        
+          <a href="https://openreview.net/forum?id=WWXjMYZxfH" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">HTML</a>
+        
+      
+      
+        
+          <a href="https://openreview.net/pdf?id=WWXjMYZxfH" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">PDF</a>
+        
+      
+      
+      
+      
+      
+        <a href="https://github.com/ernie-research/MA-RLHF" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Code</a>
+      
+      
+      
+      
+    </div>
+    
+      
+      
+
+      
+      
+
+      
+      
+      
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+</li>
+<li>
+<div class="row">
+  
+    <div class="col col-sm-2 abbr">
+          <abbr class="badge rounded">ICLR</abbr><span class="award badge">Spotlight</span>
+      
+      
+    </div>
+  
+
+  <!-- Entry bib key -->
+  <div id="li2024toolaugmented" class="col-sm-8">
+    <!-- Title -->
+    <div class="title">Tool-Augmented Reward Modeling</div>
+    <!-- Author -->
+    <div class="author">
+      
+
+      
+      
+          Lei
+            Li<sup>*^</sup>, <em>Yekun
+            Chai<sup>*†</sup></em>, <a href="https://scholar.google.com/citations?user=fUkS6pAAAAAJ" rel="external nofollow noopener" target="_blank">Shuohuan
+              Wang</a>
+          , Yu
+            Sun, and
+        <span class="more-authors" title="click to view 3 more authors" onclick="
+              var element = $(this);
+              element.attr('title', '');
+              var more_authors_text = element.text() == '3 more authors' ? 'Hao Tian, Ningyu Zhang, Hua Wu' : '3 more authors';
+              var cursorPosition = 0;
+              var textAdder = setInterval(function(){
+                element.html(more_authors_text.substring(0, cursorPosition + 1));
+                if (++cursorPosition == more_authors_text.length){
+                  clearInterval(textAdder);
+                }
+            }, '10');
+          ">3 more authors</span>
+      
+      
+        <i class="fa-solid fa-circle-info ml-1" data-toggle="popover" data-placement="top" data-html="true" data-content="* Equal contribution&lt;br&gt;† Project lead">
+        </i>
+      
+    </div>
+
+    <!-- Journal/Book title and date -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="periodical">
+      <em>In The Twelfth International Conference on Learning Representations</em> <u><small><i>(top 5%)</i></small></u>
+,  2024
+    </div>
+    <div class="periodical">
+      
+    </div>
+
+    <!-- Links/Buttons -->
+    <div class="links">
+      <!--
+      
+        <a class="award btn btn-sm z-depth-0" role="button">Awareded</a>
+      
+      -->
+      
+      
+      
+      
+      
+        
+          <a href="https://openreview.net/forum?id=d94x0gWTUX" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">HTML</a>
+        
+      
+      
+        
+          <a href="https://openreview.net/pdf?id=d94x0gWTUX" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">PDF</a>
+        
+      
+      
+      
+      
+      
+        <a href="https://github.com/ernie-research/Tool-Augmented-Reward-Model" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Code</a>
+      
+      
+        
+          <a href="/assets/pdf/poster/tarm_iclr24_poster.pdf" class="btn btn-sm z-depth-0" role="button">Poster</a>
+        
+      
+      
+        
+          <a href="https://iclr.cc/media/iclr-2024/Slides/18272.pdf" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Slides</a>
+        
+      
+      
+    </div>
+    
+      
+      
+
+      
+      
+
+      
+      
+      
+    
+
+    
+      <!-- Hidden Award block -->
+      <div class="award hidden d-print-inline">
+        <p></p>
+<p>Spotlight</p>
+
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+</li>
+<li>
+<div class="row">
+  
+    <div class="col col-sm-2 abbr">
+          <abbr class="badge rounded">ACL-Findings</abbr><span class="award badge"></span>
+      
+      
+    </div>
+  
+
+  <!-- Entry bib key -->
+  <div id="chai-etal-2023-ernie-code" class="col-sm-8">
+    <!-- Title -->
+    <div class="title">ERNIE-Code: Beyond English-Centric Cross-lingual Pretraining for Programming Languages</div>
+    <!-- Author -->
+    <div class="author">
+      
+
+      
+      <em>Yekun
+            Chai</em>, <a href="https://scholar.google.com/citations?user=fUkS6pAAAAAJ" rel="external nofollow noopener" target="_blank">Shuohuan
+              Wang</a>, Chao
+            Pang
+          , Yu
+            Sun, and
+        <span class="more-authors" title="click to view 2 more authors" onclick="
+              var element = $(this);
+              element.attr('title', '');
+              var more_authors_text = element.text() == '2 more authors' ? 'Hao Tian, Hua Wu' : '2 more authors';
+              var cursorPosition = 0;
+              var textAdder = setInterval(function(){
+                element.html(more_authors_text.substring(0, cursorPosition + 1));
+                if (++cursorPosition == more_authors_text.length){
+                  clearInterval(textAdder);
+                }
+            }, '10');
+          ">2 more authors</span>
+      
+      
+    </div>
+
+    <!-- Journal/Book title and date -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="periodical">
+      <em>In Findings of the Association for Computational Linguistics: ACL 2023</em>
+,  Jul 2023
+    </div>
+    <div class="periodical">
+      
+    </div>
+
+    <!-- Links/Buttons -->
+    <div class="links">
+      <!--
+      
+        <a class="award btn btn-sm z-depth-0" role="button">Awareded</a>
+      
+      -->
+      
+        <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
+      
+      
+      
+      
+      
+        
+          <a href="https://aclanthology.org/2023.findings-acl.676" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">HTML</a>
+        
+      
+      
+        
+          <a href="https://aclanthology.org/2023.findings-acl.676.pdf" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">PDF</a>
+        
+      
+      
+      
+      
+      
+        <a href="https://github.com/PaddlePaddle/PaddleNLP/blob/v2.8.1/model_zoo/ernie-code/README.en.md" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Code</a>
+      
+      
+      
+      
+    </div>
+    
+      
+      
+
+      
+      
+
+      
+      
+      
+    
+
+    
+      <!-- Hidden Award block -->
+      <div class="award hidden d-print-inline">
+        <p>
+</p>
+      </div>
+    
+
+    
+
+    
+      <!-- Hidden abstract block -->
+      <div class="abstract hidden">
+        <p>Software engineers working with the same programming language (PL) may speak different natural languages (NLs) and vice versa, erecting huge barriers to communication and working efficiency. Recent studies have demonstrated the effectiveness of generative pre-training in computer programs, yet they are always English-centric. In this work, we step towards bridging the gap between multilingual NLs and multilingual PLs for large language models (LLMs). We release ERNIE-Code, a unified pre-trained language model for 116 NLs and 6 PLs. We employ two methods for universal cross-lingual pre-training: span-corruption language modeling that learns patterns from monolingual NL or PL; and pivot-based translation language modeling that relies on parallel data of many NLs and PLs. Extensive results show that ERNIE-Code outperforms previous multilingual LLMs for PL or NL across a wide range of end tasks of code intelligence, including multilingual code-to-text, text-to-code, code-to-code, and text-to-text generation. We further show its advantage of zero-shot prompting on multilingual code summarization and text-to-text translation. We release our code and pre-trained checkpoints.</p>
+      </div>
+    
+
+    
+
+    
+  </div>
+</div>
+</li>
+</ol>
+</div>
+
+    
+
+    <!-- Academic Services -->
+    
+      <h2>
+        <a href="/academic_services/" style="color: inherit">academic services</a>
+      </h2>
+      <div class="academic_services">
+        <div class="contact-icons"><div class="academic-services">
+  <div class="table-responsive">
+    <table class="table table-sm table-borderless compact-table">
+      
+
+      
+      <tr>
+        <th scope="row">Conference PC/Reviewer</th>
+        <td>
+          
+            ACL, EMNLP, ICLR, NeurIPS, NAACL, COLING, EACL, COLM, ICASSP, LREC
+          
+        </td>
+      </tr>
+      
+
+      
+      <tr>
+        <th scope="row">Journal Reviewer</th>
+        <td>
+          
+            TASLP
+          
+        </td>
+      </tr>
+      
+    </table>
+  </div>
+</div></div>
+      </div>
+    
+
+    <!-- Social -->
+    
+
+    
+  </article>
+</div>
+
+      
+    </div>
+
+    <!-- Footer -->
+    
+  <footer class="fixed-bottom" role="contentinfo">
+    <div class="container mt-0">
+      © Copyright 2025
+      Yekun
+      
+      Chai. 
+      
+      <!-- cyk added START -->
+      
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+        </script>
+        <span id="busuanzi_value_site_uv"> </span> visitors.
+      
+      <!-- cyk added END -->
+
+      
+    </div>
+  </footer>
+
+
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="/assets/js/mdb.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    
+  <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  <!-- Enable Tooltips -->
+  <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+
+
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script>
+
+
+
+<!-- Bootstrap Table -->
+
+
+<!-- Load Common JS -->
+<script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script>
+<script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script>
+<script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script>
+
+<!-- Bibsearch Feature -->
+
+  <script src="/assets/js/bibsearch.js?a8796296a5e2f80c5e498cdd51d7761e" type="module"></script>
+
+
+<!-- Jupyter Open External Links New Tab -->
+<script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script>
+
+
+
+    
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+
+
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+
+
+    
+  
+    <!-- MathJax -->
+    <script type="text/javascript">
+      window.MathJax = {
+        tex: {
+          tags: 'ams',
+        },
+      };
+    </script>
+    <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script>
+  
+
+
+    
+
+    
+
+
+
+    
+  <!-- Scrolling Progress Bar -->
+  <script type="text/javascript">
+    /*
+     * This JavaScript code has been adapted from the article
+     * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar,
+     * published on the website https://css-tricks.com on the 7th of May, 2014.
+     * Couple of changes were made to the original code to make it compatible
+     * with the `al-foio` theme.
+     */
+    const progressBar = $('#progress');
+    /*
+     * We set up the bar after all elements are done loading.
+     * In some cases, if the images in the page are larger than the intended
+     * size they'll have on the page, they'll be resized via CSS to accomodate
+     * the desired size. This mistake, however, breaks the computations as the
+     * scroll size is computed as soon as the elements finish loading.
+     * To account for this, a minimal delay was introduced before computing the
+     * values.
+     */
+    window.onload = function () {
+      setTimeout(progressBarSetup, 50);
+    };
+    /*
+     * We set up the bar according to the browser.
+     * If the browser supports the progress element we use that.
+     * Otherwise, we resize the bar thru CSS styling
+     */
+    function progressBarSetup() {
+      if ('max' in document.createElement('progress')) {
+        initializeProgressElement();
+        $(document).on('scroll', function () {
+          progressBar.attr({ value: getCurrentScrollPosition() });
+        });
+        $(window).on('resize', initializeProgressElement);
+      } else {
+        resizeProgressBar();
+        $(document).on('scroll', resizeProgressBar);
+        $(window).on('resize', resizeProgressBar);
+      }
+    }
+    /*
+     * The vertical scroll position is the same as the number of pixels that
+     * are hidden from view above the scrollable area. Thus, a value > 0 is
+     * how much the user has scrolled from the top
+     */
+    function getCurrentScrollPosition() {
+      return $(window).scrollTop();
+    }
+
+    function initializeProgressElement() {
+      let navbarHeight = $('#navbar').outerHeight(true);
+      $('body').css({ 'padding-top': navbarHeight });
+      $('progress-container').css({ 'padding-top': navbarHeight });
+      progressBar.css({ top: navbarHeight });
+      progressBar.attr({
+        max: getDistanceToScroll(),
+        value: getCurrentScrollPosition(),
+      });
+    }
+    /*
+     * The offset between the html document height and the browser viewport
+     * height will be greater than zero if vertical scroll is possible.
+     * This is the distance the user can scroll
+     */
+    function getDistanceToScroll() {
+      return $(document).height() - $(window).height();
+    }
+
+    function resizeProgressBar() {
+      progressBar.css({ width: getWidthPercentage() + '%' });
+    }
+    // The scroll ratio equals the percentage to resize the bar
+    function getWidthPercentage() {
+      return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+    }
+  </script>
+
+
+    
+
+    
+
+    
+
+    
+  <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script>
+  <script>
+    addBackToTop();
+  </script>
+
+
+    
+  <script type="module" src="/assets/js/search/ninja-keys.min.js?601a2d3465e2a52bec38b600518d5f70"></script>
+  <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys>
+  <script>
+    let searchTheme = determineComputedTheme();
+    const ninjaKeys = document.querySelector('ninja-keys');
+
+    if (searchTheme === 'dark') {
+      ninjaKeys.classList.add('dark');
+    } else {
+      ninjaKeys.classList.remove('dark');
+    }
+
+    const openSearchModal = () => {
+      // collapse navbarNav if expanded on mobile
+      const $navbarNav = $('#navbarNav');
+      if ($navbarNav.hasClass('show')) {
+        $navbarNav.collapse('hide');
+      }
+      ninjaKeys.open();
+    };
+  </script>
+  <script>
+    // get the ninja-keys element
+    const ninja = document.querySelector('ninja-keys');
+
+    // add the home and posts menu items
+    ninja.data = [{
+        id: "nav-about",
+        title: "about",
+        section: "Navigation",
+        handler: () => {
+          window.location.href = "/";
+        },
+      },{id: "nav-publications",
+              title: "publications",
+              description: "* indicates equal contribution; ^ denotes the student/researcher/intern I mentored.",
+              section: "Navigation",
+              handler: () => {
+                window.location.href = "/publications/";
+              },
+            },{id: "nav-notes",
+              title: "notes",
+              description: "",
+              section: "Navigation",
+              handler: () => {
+                window.location.href = "/notes/";
+              },
+            },{id: "news-we-are-excited-to-announce-the-release-of-ernie-bot-文心一言-baidu-s-cutting-edge-chatgpt-like-ai-product-explore-it-at-https-yiyan-baidu-com-rocket",
+              title: 'We are excited to announce the release of ERNIE-Bot(文心一言), Baidu’s cutting-edge ChatGPT-like AI...',
+              description: "",
+              section: "News",},{id: "news-ernie-code-on-multilingual-text-and-code-pre-training-has-been-accepted-to-acl-findings-2023-check-our-code-and-models-snowflake",
+              title: 'ERNIE-Code on multilingual text and code pre-training has been accepted to ACL (Findings)...',
+              description: "",
+              section: "News",},{id: "news-one-paper-on-xai-has-been-accepted-to-neurips-2023-datasets-and-benchmarks-track-code-is-available-here",
+              title: 'One paper on XAI has been accepted to NeurIPS 2023 datasets and benchmarks...',
+              description: "",
+              section: "News",},{id: "news-one-paper-on-tool-augmented-reward-models-has-been-accepted-to-iclr-2024-spotlight-sparkles-dive-into-our-research-and-code-now-fire",
+              title: 'One paper on tool-augmented reward models has been accepted to ICLR 2024 (spotlight)<img class="emoji" title=":sparkles:" alt=":sparkles:" src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png" height="20" width="20">....',
+              description: "",
+              section: "News",},{id: "news-one-paper-on-humaneval-xl-a-multilingual-code-generation-benchmark-has-been-accepted-to-lrec-coling-2024-we-ve-released-the-code-and-data",
+              title: 'One paper on HumanEval-XL, a multilingual code generation benchmark has been accepted to...',
+              description: "",
+              section: "News",},{id: "news-one-paper-on-gilot-an-xai-approach-for-llms-has-been-accepted-to-icml-2024-snowflake",
+              title: 'One paper on GiLOT, an XAI approach for LLMs, has been accepted to...',
+              description: "",
+              section: "News",},{id: "news-our-papers-on-pixelgpt-gptfluence-and-tkeval-have-been-accepted-to-emnlp-2024-amp-amp-findings-bear",
+              title: 'Our papers on PixelGPT, GPTfluence, and TKEval have been accepted to EMNLP 2024...',
+              description: "",
+              section: "News",},{id: "news-one-paper-on-macro-action-rlhf-has-been-accepted-to-iclr-2025-bear-dive-into-our-research-and-code-now-fire",
+              title: 'One paper on macro action RLHF has been accepted to ICLR 2025<img class="emoji" title=":bear:" alt=":bear:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f43b.png" height="20" width="20">. Dive...',
+              description: "",
+              section: "News",},{id: "news-one-paper-on-curiosity-driven-rlhf-has-been-accepted-to-acl-2025",
+              title: 'One paper on curiosity-driven RLHF has been accepted to ACL 2025.',
+              description: "",
+              section: "News",},{id: "news-four-papers-have-been-accepted-to-emnlp-2025-amp-amp-findings-bear",
+              title: 'Four papers have been accepted to EMNLP 2025 &amp; Findings. <img class="emoji" title=":bear:" alt=":bear:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f43b.png" height="20" width="20">',
+              description: "",
+              section: "News",},{
+          id: 'light-theme',
+          title: 'Change theme to light',
+          description: 'Change the theme of the site to Light',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("light");
+          },
+        },
+        {
+          id: 'dark-theme',
+          title: 'Change theme to dark',
+          description: 'Change the theme of the site to Dark',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("dark");
+          },
+        },
+        {
+          id: 'system-theme',
+          title: 'Use system default theme',
+          description: 'Change the theme of the site to System Default',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("system");
+          },
+        },];
+  </script>
+  <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script>
+
+
+  </body>
+</html>
