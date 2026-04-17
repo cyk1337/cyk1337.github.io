@@ -1,4 +1,4 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Attention Mechanisms and the Transformer Architecture | Yekun Chai </title> <meta name="author" content="Yekun Chai"> <meta name="description" content="From seq2seq bottlenecks to self-attention—a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations."> <meta name="keywords" content="AI Research, LLM, Yekun Chai"> <meta property="og:site_name" content="Yekun Chai"> <meta property="og:type" content="article"> <meta property="og:title" content="Yekun Chai | Attention Mechanisms and the Transformer Architecture"> <meta property="og:url" content="https://cyk1337.github.io/blog/2019/attention-mechanisms-and-transformer/"> <meta property="og:description" content="From seq2seq bottlenecks to self-attention—a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations."> <meta property="og:image" content="https://cyk1337.github.io/assets/img/ernie.jpeg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Attention Mechanisms and the Transformer Architecture"> <meta name="twitter:description" content="From seq2seq bottlenecks to self-attention—a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations."> <meta name="twitter:image" content="https://cyk1337.github.io/assets/img/ernie.jpeg"> <script type="application/ld+json">
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Attention Mechanisms and the Transformer Architecture | Yekun Chai </title> <meta name="author" content="Yekun Chai"> <meta name="description" content="From seq2seq bottlenecks to self-attention—a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations."> <meta property="og:site_name" content="Yekun Chai"> <meta property="og:type" content="article"> <meta property="og:title" content="Yekun Chai | Attention Mechanisms and the Transformer Architecture"> <meta property="og:url" content="https://cyk1337.github.io/blog/2019/attention-mechanisms-and-transformer/"> <meta property="og:description" content="From seq2seq bottlenecks to self-attention—a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations."> <meta property="og:image" content="https://cyk1337.github.io/assets/img/ernie.jpeg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Attention Mechanisms and the Transformer Architecture"> <meta name="twitter:description" content="From seq2seq bottlenecks to self-attention—a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations."> <meta name="twitter:image" content="https://cyk1337.github.io/assets/img/ernie.jpeg"> <script type="application/ld+json">
     {
         "author":
         {
@@ -15,7 +15,9 @@
         "name": "Yekun Chai",
         "@context": "https://schema.org"
     }
-  </script> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link defer href="/assets/css/bootstrap-toc.min.css?6f5af0bb9aab25d79b2448143cbeaa88" rel="stylesheet"> <link rel="shortcut icon" href="/assets/img/london.jpg?0d095b7e05ed6c66450568973ade4380"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://cyk1337.github.io/blog/2019/attention-mechanisms-and-transformer/"> <script src="/assets/js/theme.js?9a0c749ec5240d9cda97bc72359a72c0"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>initTheme();</script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Yekun</span> Chai </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top"></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Attention Mechanisms and the Transformer Architecture</h1> <p class="post-meta"> Created in January 22, 2019 </p> <p class="post-tags"> <a href="/blog/2019"> <i class="fa-solid fa-calendar fa-sm"></i> 2019 </a>   ·   <a href="/blog/tag/transformer"> <i class="fa-solid fa-hashtag fa-sm"></i> Transformer</a>   <a href="/blog/tag/attention"> <i class="fa-solid fa-hashtag fa-sm"></i> Attention</a>   <a href="/blog/tag/machine-learning"> <i class="fa-solid fa-hashtag fa-sm"></i> machine-learning</a>   ·   <a href="/blog/category/machine-learning"> <i class="fa-solid fa-tag fa-sm"></i> machine-learning</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>The attention mechanism is perhaps the most consequential architectural innovation in modern deep learning. It emerged from a simple observation: compressing an entire source sentence into a single fixed-length vector is a fundamental information bottleneck. Bahdanau et al. (2014) showed that allowing the decoder to <em>attend</em> to all encoder hidden states—weighting them by learned alignment scores—dramatically improved machine translation, especially for long sentences. This idea of dynamic, content-dependent weighting proved so powerful that Vaswani et al. (2017) built an entire architecture around it: the Transformer, which replaced recurrence entirely with self-attention.</p> <p>This post covers the progression from seq2seq to the Transformer: additive attention, the attention score function zoo, scaled dot-product and multi-head attention with complete implementations, the encoder-decoder architecture, positional encoding, and relative position representations (RPR).</p> <h2 id="background-the-seq2seq-bottleneck">Background: The Seq2Seq Bottleneck</h2> <p>The encoder-decoder architecture<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> encodes a variable-length input \((x_1, \ldots, x_T)\) into a fixed-length context vector $c$, then decodes it into the target \((y_1, \ldots, y_{T'})\):</p> \[p(y_1, \ldots, y_{T'} \vert x_1, \ldots, x_T) = \prod_{t=1}^{T'} p(y_t \vert c, y_1, \ldots, y_{t-1})\] \[p(y_t \vert c, y_1, \ldots, y_{t-1}) = g(y_{t-1}, s_t, c)\] <blockquote> <p><strong>Problem</strong>: The fixed-length context vector $c$ becomes a bottleneck for long sequences—the encoder must compress all information into a single vector, and performance drops sharply as input length increases<sup id="fnref:4"><a href="#fn:4" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>.</p> </blockquote> <p><img src="/assets/img/blog/attention-nutshell/seq2seq.png" alt="Seq2seq architecture"></p> <h2 id="attention-mechanism-bahdanau-et-al-2014">Attention Mechanism (Bahdanau et al., 2014)</h2> <p>Instead of a single context vector, the decoder attends to all encoder hidden states with a <em>distinct</em> context vector \(c_i\) for each target position<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>:</p> <p><strong>Encoder</strong>: Bidirectional RNN produces annotations \(h_j = [\overrightarrow{h}_j^\top,\, \overleftarrow{h}_j^\top]^\top\).</p> <p><strong>Decoder</strong>:</p> \[c_i = \sum_{j=1}^{T_x} \alpha_{ij} h_j, \qquad \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}, \qquad e_{ij} = \text{score}(s_{i-1}, h_j)\] <p>where $\text{score}$ is the <strong>additive (Bahdanau) alignment model</strong>:</p> \[\text{score}(s_t, h_i) = \mathbf{v}_a^\top \tanh(\mathbf{W}_a [s_t;\, h_i])\] <p><img src="/assets/img/blog/attention-nutshell/additive-attn.png" alt="Additive attention" width="80%"></p> <h2 id="attention-score-functions">Attention Score Functions</h2> <table> <thead> <tr> <th>Type</th> <th>Score Function</th> <th>Reference</th> </tr> </thead> <tbody> <tr> <td><strong>Additive (concat)</strong></td> <td>\(\mathbf{v}_a^\top \tanh(\mathbf{W}_a[\mathbf{h}_t;\, \bar{\mathbf{h}}_s])\)</td> <td>Bahdanau<sup id="fnref:3:1"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> </td> </tr> <tr> <td><strong>General</strong></td> <td>\(\mathbf{h}_t^\top \mathbf{W}_a \bar{\mathbf{h}}_s\)</td> <td>Luong<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> </td> </tr> <tr> <td><strong>Dot-product</strong></td> <td>\(\mathbf{h}_t^\top \bar{\mathbf{h}}_s\)</td> <td>Luong<sup id="fnref:5:1"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> </td> </tr> <tr> <td><strong>Scaled dot-product</strong></td> <td>\(\mathbf{h}_t^\top \bar{\mathbf{h}}_s / \sqrt{d}\)</td> <td>Vaswani<sup id="fnref:6"><a href="#fn:6" class="footnote" rel="footnote" role="doc-noteref">5</a></sup> </td> </tr> <tr> <td><strong>Location-based</strong></td> <td>\(\text{softmax}(\mathbf{W}_a \mathbf{h}_t)\)</td> <td>Luong<sup id="fnref:5:2"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> </td> </tr> </tbody> </table> <h2 id="transformer-architecture">Transformer Architecture</h2> <p>The Transformer<sup id="fnref:6:1"><a href="#fn:6" class="footnote" rel="footnote" role="doc-noteref">5</a></sup> replaces recurrence entirely with <strong>stacked self-attention</strong> and point-wise feed-forward layers, connected by residual connections and layer normalization: $\text{LayerNorm}(x + \text{Sublayer}(x))$.</p> <h3 id="encoder">Encoder</h3> <p>$N = 6$ identical layers, each containing multi-head self-attention followed by a position-wise FFN:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
+  </script> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link defer href="/assets/css/bootstrap-toc.min.css?6f5af0bb9aab25d79b2448143cbeaa88" rel="stylesheet"> <link rel="shortcut icon" href="/assets/img/london.jpg?0d095b7e05ed6c66450568973ade4380"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://cyk1337.github.io/blog/2019/attention-mechanisms-and-transformer/"> <script src="/assets/js/theme.js?9a0c749ec5240d9cda97bc72359a72c0"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Yekun</span> Chai </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/blog/">blog </a> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="row"> <div class="col-sm-3"> <nav id="toc-sidebar" class="sticky-top"></nav> </div> <div class="col-sm-9"> <div class="post"> <header class="post-header"> <h1 class="post-title">Attention Mechanisms and the Transformer Architecture</h1> <p class="post-meta"> Created in January 22, 2019 </p> <p class="post-tags"> <a href="/blog/2019"> <i class="fa-solid fa-calendar fa-sm"></i> 2019 </a>   ·   <a href="/blog/tag/transformer"> <i class="fa-solid fa-hashtag fa-sm"></i> Transformer</a>   <a href="/blog/tag/attention"> <i class="fa-solid fa-hashtag fa-sm"></i> Attention</a>   <a href="/blog/tag/machine-learning"> <i class="fa-solid fa-hashtag fa-sm"></i> machine-learning</a>   ·   <a href="/blog/category/machine-learning"> <i class="fa-solid fa-tag fa-sm"></i> machine-learning</a> </p> </header> <article class="post-content"> <div id="markdown-content"> <p>The attention mechanism is perhaps the most consequential architectural innovation in modern deep learning. It emerged from a simple observation: compressing an entire source sentence into a single fixed-length vector is a fundamental information bottleneck. Bahdanau et al. (2014) showed that allowing the decoder to <em>attend</em> to all encoder hidden states—weighting them by learned alignment scores—dramatically improved machine translation, especially for long sentences. This idea of dynamic, content-dependent weighting proved so powerful that Vaswani et al. (2017) built an entire architecture around it: the Transformer, which replaced recurrence entirely with self-attention.</p> <p>This post covers the progression from seq2seq to the Transformer: additive attention, the attention score function zoo, scaled dot-product and multi-head attention with complete implementations, the encoder-decoder architecture, positional encoding, and relative position representations (RPR).</p> <h2 id="background-the-seq2seq-bottleneck">Background: The Seq2Seq Bottleneck</h2> <p>The encoder-decoder architecture<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> encodes a variable-length input \((x_1, \ldots, x_T)\) into a fixed-length context vector $c$, then decodes it into the target \((y_1, \ldots, y_{T'})\):</p> \[p(y_1, \ldots, y_{T'} \vert x_1, \ldots, x_T) = \prod_{t=1}^{T'} p(y_t \vert c, y_1, \ldots, y_{t-1})\] \[p(y_t \vert c, y_1, \ldots, y_{t-1}) = g(y_{t-1}, s_t, c)\] <blockquote> <p><strong>Problem</strong>: The fixed-length context vector $c$ becomes a bottleneck for long sequences—the encoder must compress all information into a single vector, and performance drops sharply as input length increases<sup id="fnref:4"><a href="#fn:4" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>.</p> </blockquote> <p><img src="/assets/img/blog/attention-nutshell/seq2seq.png" alt="Seq2seq architecture"></p> <h2 id="attention-mechanism-bahdanau-et-al-2014">Attention Mechanism (Bahdanau et al., 2014)</h2> <p>Instead of a single context vector, the decoder attends to all encoder hidden states with a <em>distinct</em> context vector \(c_i\) for each target position<sup id="fnref:3"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>:</p> <p><strong>Encoder</strong>: Bidirectional RNN produces annotations \(h_j = [\overrightarrow{h}_j^\top,\, \overleftarrow{h}_j^\top]^\top\).</p> <p><strong>Decoder</strong>:</p> \[c_i = \sum_{j=1}^{T_x} \alpha_{ij} h_j, \qquad \alpha_{ij} = \frac{\exp(e_{ij})}{\sum_{k=1}^{T_x} \exp(e_{ik})}, \qquad e_{ij} = \text{score}(s_{i-1}, h_j)\] <p>where $\text{score}$ is the <strong>additive (Bahdanau) alignment model</strong>:</p> \[\text{score}(s_t, h_i) = \mathbf{v}_a^\top \tanh(\mathbf{W}_a [s_t;\, h_i])\] <p><img src="/assets/img/blog/attention-nutshell/additive-attn.png" alt="Additive attention" width="80%"></p> <h2 id="attention-score-functions">Attention Score Functions</h2> <table> <thead> <tr> <th>Type</th> <th>Score Function</th> <th>Reference</th> </tr> </thead> <tbody> <tr> <td><strong>Additive (concat)</strong></td> <td>\(\mathbf{v}_a^\top \tanh(\mathbf{W}_a[\mathbf{h}_t;\, \bar{\mathbf{h}}_s])\)</td> <td>Bahdanau<sup id="fnref:3:1"><a href="#fn:3" class="footnote" rel="footnote" role="doc-noteref">3</a></sup> </td> </tr> <tr> <td><strong>General</strong></td> <td>\(\mathbf{h}_t^\top \mathbf{W}_a \bar{\mathbf{h}}_s\)</td> <td>Luong<sup id="fnref:5"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> </td> </tr> <tr> <td><strong>Dot-product</strong></td> <td>\(\mathbf{h}_t^\top \bar{\mathbf{h}}_s\)</td> <td>Luong<sup id="fnref:5:1"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> </td> </tr> <tr> <td><strong>Scaled dot-product</strong></td> <td>\(\mathbf{h}_t^\top \bar{\mathbf{h}}_s / \sqrt{d}\)</td> <td>Vaswani<sup id="fnref:6"><a href="#fn:6" class="footnote" rel="footnote" role="doc-noteref">5</a></sup> </td> </tr> <tr> <td><strong>Location-based</strong></td> <td>\(\text{softmax}(\mathbf{W}_a \mathbf{h}_t)\)</td> <td>Luong<sup id="fnref:5:2"><a href="#fn:5" class="footnote" rel="footnote" role="doc-noteref">4</a></sup> </td> </tr> </tbody> </table> <h2 id="transformer-architecture">Transformer Architecture</h2> <p>The Transformer<sup id="fnref:6:1"><a href="#fn:6" class="footnote" rel="footnote" role="doc-noteref">5</a></sup> replaces recurrence entirely with <strong>stacked self-attention</strong> and point-wise feed-forward layers, connected by residual connections and layer normalization: $\text{LayerNorm}(x + \text{Sublayer}(x))$.</p> <h3 id="encoder">Encoder</h3> <p>$N = 6$ identical layers, each containing multi-head self-attention followed by a position-wise FFN:</p> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr>
 <td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -169,4 +171,374 @@
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">self</span><span class="p">.</span><span class="n">pe</span><span class="p">[:,</span> <span class="p">:</span><span class="n">x</span><span class="p">.</span><span class="nf">size</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-</pre></td> </tr></tbody></table></code></pre></div></div> <p><img src="/assets/img/blog/attention-nutshell/transformer.png" alt="Transformer architecture"></p> <h3 id="relative-position-representations-rpr">Relative Position Representations (RPR)</h3> <p>Shaw et al.<sup id="fnref:14"><a href="#fn:14" class="footnote" rel="footnote" role="doc-noteref">6</a></sup> extend self-attention with learned <strong>relative position embeddings</strong> \(a_{ij}^K, a_{ij}^V\):</p> \[e_{ij} = \frac{x_i W^Q (x_j W^K + a_{ij}^K)^\top}{\sqrt{d_k}}, \qquad z_i = \sum_{j=1}^n \alpha_{ij}(x_j W^V + a_{ij}^V)\] <p>Positions beyond a maximum distance $k$ are clipped:</p> \[a_{ij}^K = w^K_{\text{clip}(j-i, k)}, \qquad \text{clip}(x, k) = \max(-k, \min(k, x))\] <p>This allows the model to generalize to unseen sequence lengths while keeping a bounded number of learned parameters (\(2 \times (2k+1) \times d_k\)).</p> <h2 id="references">References</h2> <div class="footnotes" role="doc-endnotes"> <ol> <li id="fn:1"> <p>Sutskever, I., Vinyals, O. and Le, Q.V. <a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" rel="external nofollow noopener" target="_blank">Sequence to Sequence Learning with Neural Networks</a>. NeurIPS 2014. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p> </li> <li id="fn:4"> <p>Cho, K., et al. <a href="https://arxiv.org/abs/1409.1259" rel="external nofollow noopener" target="_blank">On the Properties of Neural Machine Translation: Encoder-Decoder Approaches</a>. SSST@EMNLP 2014. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">↩</a></p> </li> <li id="fn:3"> <p>Bahdanau, D., Cho, K. and Bengio, Y. <a href="https://arxiv.org/abs/1409.0473" rel="external nofollow noopener" target="_blank">Neural Machine Translation by Jointly Learning to Align and Translate</a>. ICLR 2015. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">↩</a> <a href="#fnref:3:1" class="reversefootnote" role="doc-backlink">↩<sup>2</sup></a></p> </li> <li id="fn:5"> <p>Luong, T., Pham, H. and Manning, C.D. <a href="https://arxiv.org/abs/1508.04025" rel="external nofollow noopener" target="_blank">Effective Approaches to Attention-based Neural Machine Translation</a>. EMNLP 2015. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">↩</a> <a href="#fnref:5:1" class="reversefootnote" role="doc-backlink">↩<sup>2</sup></a> <a href="#fnref:5:2" class="reversefootnote" role="doc-backlink">↩<sup>3</sup></a></p> </li> <li id="fn:6"> <p>Vaswani, A., et al. <a href="https://arxiv.org/abs/1706.03762" rel="external nofollow noopener" target="_blank">Attention Is All You Need</a>. NeurIPS 2017. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">↩</a> <a href="#fnref:6:1" class="reversefootnote" role="doc-backlink">↩<sup>2</sup></a></p> </li> <li id="fn:14"> <p>Shaw, P., Uszkoreit, J. and Vaswani, A. <a href="https://arxiv.org/abs/1803.02155" rel="external nofollow noopener" target="_blank">Self-Attention with Relative Position Representations</a>. NAACL 2018. <a href="#fnref:14" class="reversefootnote" role="doc-backlink">↩</a></p> </li> </ol> </div> </div> </article> <br> <hr> <br> <ul class="list-disc pl-8"></ul> <p class="mb-3 mt-8" style="font-size:1.05rem;font-weight:600;">Related Posts</p> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/multimodal-tokenization-with-vector-quantization/">Multimodal Tokenization with Vector Quantization: A Review</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/memory-efficient-attention/">Memory-Efficient Attention: MHA vs. MQA vs. GQA vs. MLA</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/position-encoding-in-transformers/">Positional Encoding in Transformers: From Sinusoidal to RoPE</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2022/diffusion-models-math-guide/">Diffusion Models: A Mathematical Guide from Scratch</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2022/efficient-distributed-training/">Efficient Distributed Training: From DP to ZeRO and FlashAttention</a> </li> </div> <script>document.addEventListener("DOMContentLoaded",function(){var e="10em",t=15;document.querySelectorAll("article.post-content div.highlight, article.post-content pre > code").forEach(function(n){var o=n.closest("div.highlight")||n.closest("pre");if(o&&!o.dataset.collapsible&&(o.dataset.collapsible="true",!((o.textContent.match(/\n/g)||[]).length<t))){o.style.maxHeight=e,o.style.overflow="hidden",o.style.position="relative",o.style.transition="max-height 0.35s ease";var l=document.createElement("div");l.style.cssText="position:absolute;bottom:0;left:0;right:0;height:2.5em;background:linear-gradient(transparent,var(--global-bg-color,#fff) 70%);pointer-events:none;z-index:1;",o.appendChild(l);var s=document.createElement("div");s.style.cssText="text-align:center;cursor:pointer;padding:4px 0;margin-bottom:1em;",s.innerHTML='<span style="font-size:0.7rem;color:var(--global-theme-color,#888);opacity:0.7;user-select:none;">\u25bc show more</span>',o.parentNode.insertBefore(s,o.nextSibling);var r=!1;s.addEventListener("click",function(){(r=!r)?(o.style.maxHeight=o.scrollHeight+"px",l.style.display="none",s.innerHTML='<span style="font-size:0.7rem;color:var(--global-theme-color,#888);opacity:0.7;user-select:none;">\u25b2 show less</span>'):(o.style.maxHeight=e,l.style.display="",s.innerHTML='<span style="font-size:0.7rem;color:var(--global-theme-color,#888);opacity:0.7;user-select:none;">\u25bc show more</span>')})}})});</script> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Yekun Chai. <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> <span id="busuanzi_value_site_uv"></span> visitors. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script type="text/javascript">$(function(){$('[data-toggle="tooltip"]').tooltip()});</script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script defer src="/assets/js/bootstrap-toc.min.js?c82ff4de8b0955d6ff14f5b05eed7eb6"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?2836b72a6d8406a635ab166236639ae3"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script src="/assets/js/bibsearch.js?a8796296a5e2f80c5e498cdd51d7761e" type="module"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">window.MathJax={tex:{tags:"ams",inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:!0}};</script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script type="text/javascript">function progressBarSetup(){"max"in document.createElement("progress")?(initializeProgressElement(),$(document).on("scroll",function(){progressBar.attr({value:getCurrentScrollPosition()})}),$(window).on("resize",initializeProgressElement)):(resizeProgressBar(),$(document).on("scroll",resizeProgressBar),$(window).on("resize",resizeProgressBar))}function getCurrentScrollPosition(){return $(window).scrollTop()}function initializeProgressElement(){let e=$("#navbar").outerHeight(!0);$("body").css({"padding-top":e}),$("progress-container").css({"padding-top":e}),progressBar.css({top:e}),progressBar.attr({max:getDistanceToScroll(),value:getCurrentScrollPosition()})}function getDistanceToScroll(){return $(document).height()-$(window).height()}function resizeProgressBar(){progressBar.css({width:getWidthPercentage()+"%"})}function getWidthPercentage(){return getCurrentScrollPosition()/getDistanceToScroll()*100}const progressBar=$("#progress");window.onload=function(){setTimeout(progressBarSetup,50)};</script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>addBackToTop();</script> <script type="module" src="/assets/js/search/ninja-keys.min.js?601a2d3465e2a52bec38b600518d5f70"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script>let searchTheme=determineComputedTheme();const ninjaKeys=document.querySelector("ninja-keys");"dark"===searchTheme?ninjaKeys.classList.add("dark"):ninjaKeys.classList.remove("dark");const openSearchModal=()=>{const e=$("#navbarNav");e.hasClass("show")&&e.collapse("hide"),ninjaKeys.open()};</script> <script>const ninja=document.querySelector("ninja-keys");ninja.data=[{id:"nav-about",title:"About",section:"Navigation",handler:()=>{window.location.href="/"}},{id:"nav-publications",title:"publications",description:"* equal contribution \xb7 \u2020 corresponding author / project lead \xb7 ^ mentored intern or student",section:"Navigation",handler:()=>{window.location.href="/publications/"}},{id:"nav-blog",title:"blog",description:"",section:"Navigation",handler:()=>{window.location.href="/blog/"}},{id:"post-multimodal-tokenization-with-vector-quantization-a-review",title:"Multimodal Tokenization with Vector Quantization: A Review",description:"From VQ-VAE to lookup-free quantization\u2014a systematic review of codebook learning, residual/hierarchical quantization, and generation architectures for multimodal tokenization.",section:"Posts",handler:()=>{window.location.href="/blog/2024/multimodal-tokenization-with-vector-quantization/"}},{id:"post-memory-efficient-attention-mha-vs-mqa-vs-gqa-vs-mla",title:"Memory-Efficient Attention: MHA vs. MQA vs. GQA vs. MLA",description:"Efficient attention variants (MHA, MQA, GQA, MLA)\u2014memory, speed, and expressivity trade-offs for scaling transformers.",section:"Posts",handler:()=>{window.location.href="/blog/2024/memory-efficient-attention/"}},{id:"post-positional-encoding-in-transformers-from-sinusoidal-to-rope",title:"Positional Encoding in Transformers: From Sinusoidal to RoPE",description:"A survey of positional encoding in transformers\u2014sinusoidal PE, RoPE, T5 bias, ALiBi, KERPLE, xPos, Sandwich, interpolation, and NTK-scaled RoPE\u2014with implementations and references.",section:"Posts",handler:()=>{window.location.href="/blog/2023/position-encoding-in-transformers/"}},{id:"post-diffusion-models-a-mathematical-guide-from-scratch",title:"Diffusion Models: A Mathematical Guide from Scratch",description:"A mathematical walkthrough of Gaussian and categorical diffusion\u2014from forward noise, reverse denoising, and ELBO to classifier guidance and discrete D3PM.",section:"Posts",handler:()=>{window.location.href="/blog/2022/diffusion-models-math-guide/"}},{id:"post-efficient-distributed-training-from-dp-to-zero-and-flashattention",title:"Efficient Distributed Training: From DP to ZeRO and FlashAttention",description:"A practical guide to distributed training\u2014data/tensor/pipeline/sequence parallelism, ZeRO, FSDP, mixed precision, and FlashAttention\u2014with formulations and implementations.",section:"Posts",handler:()=>{window.location.href="/blog/2022/efficient-distributed-training/"}},{id:"post-masking-strategies-for-pre-trained-language-models-from-mlm-to-t5",title:"Masking Strategies for Pre-trained Language Models: From MLM to T5",description:"A comprehensive survey of masking and denoising strategies in pre-training\u2014BERT&#39;s MLM (static vs. dynamic), whole-word masking, SpanBERT&#39;s geometric span masking, MASS, BART&#39;s corruption zoo, and T5&#39;s sentinel-based span corruption.",section:"Posts",handler:()=>{window.location.href="/blog/2022/masking-strategies-for-pre-trained-models/"}},{id:"post-subword-tokenization-in-nlp-bpe-wordpiece-and-unigram",title:"Subword Tokenization in NLP: BPE, WordPiece, and Unigram",description:"A comprehensive guide to subword tokenization\u2014BPE, Byte-level BPE, WordPiece, and Unigram LM\u2014with algorithms, implementations (GPT-2, tiktoken, BERT, SentencePiece), and empirical comparisons.",section:"Posts",handler:()=>{window.location.href="/blog/2021/subword-tokenization-in-nlp/"}},{id:"post-bertology-from-xlnet-to-electra",title:"BERTology: From XLNet to ELECTRA",description:"A technical deep-dive into BERT-era pre-training innovations\u2014XLNet&#39;s permutation LM, two-stream attention, RoBERTa&#39;s training recipe, SpanBERT&#39;s boundary objective, ALBERT&#39;s parameter efficiency, and ELECTRA&#39;s replaced token detection.",section:"Posts",handler:()=>{window.location.href="/blog/2019/bertology-from-xlnet-to-electra/"}},{id:"post-normalization-in-neural-networks-bn-ln-rmsnorm-and-beyond",title:"Normalization in Neural Networks: BN, LN, RMSNorm, and Beyond",description:"From Batch Normalization to RMSNorm\u2014a systematic comparison of normalization techniques (BN, LN, IN, GN, SN) with formulations, implementations, and practical guidance for modern deep learning.",section:"Posts",handler:()=>{window.location.href="/blog/2019/normalization-in-neural-networks/"}},{id:"post-attention-mechanisms-and-the-transformer-architecture",title:"Attention Mechanisms and the Transformer Architecture",description:"From seq2seq bottlenecks to self-attention\u2014a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations.",section:"Posts",handler:()=>{window.location.href="/blog/2019/attention-mechanisms-and-transformer/"}},{id:"news-ernie-bot-https-yiyan-baidu-com-released",title:"[ERNIE Bot](https://yiyan.baidu.com/) released.",description:"",section:"News"},{id:"news-ernie-code-https-aclanthology-org-2023-findings-acl-676-on-multilingual-code-pre-training-accepted-to-acl-2023-findings-code-https-github-com-paddlepaddle-paddlenlp-blob-v2-8-1-model-zoo-ernie-code-readme-en-md-models-https-huggingface-co-baidu-ernie-code-560m",title:"[ERNIE-Code](https://aclanthology.org/2023.findings-acl.676) on multilingual code pre-training accepted to ACL 2023 Findings. [[code]](https://github.com/PaddlePaddle/PaddleNLP/blob/v2.8.1/model_zoo/ernie-code/README.en.md) [[models]](https://huggingface.co/baidu/ernie-code-560m)",description:"",section:"News"},{id:"news-m4-https-openreview-net-forum-id-6zcfrsz98y-on-xai-benchmarking-accepted-to-neurips-2023-d-amp-b-track-code-https-github-com-paddlepaddle-interpretdl",title:"[M4](https://openreview.net/forum?id=6zcfrSz98y) on XAI benchmarking accepted to NeurIPS 2023 D&amp;B track. [[code]](https://github.com/PaddlePaddle/InterpretDL/)",description:"",section:"News"},{id:"news-tool-augmented-reward-modeling-https-openreview-net-forum-id-d94x0gwtux-accepted-to-iclr-2024-as-spotlight-paper-https-openreview-net-pdf-id-d94x0gwtux-code-https-github-com-ernie-research-tool-augmented-reward-model",title:"[Tool-augmented reward modeling](https://openreview.net/forum?id=d94x0gWTUX) accepted to ICLR 2024 as spotlight. [[paper]](https://openreview.net/pdf?id=d94x0gWTUX) [[code]](https://github.com/ernie-research/Tool-Augmented-Reward-Model/)",description:"",section:"News"},{id:"news-humaneval-xl-https-arxiv-org-abs-2402-16694-a-multilingual-code-generation-benchmark-accepted-to-lrec-coling-2024-code-https-github-com-floatai-humaneval-xl-data-https-huggingface-co-datasets-floatai-humaneval-xl",title:"[HumanEval-XL](https://arxiv.org/abs/2402.16694), a multilingual code generation benchmark, accepted to LREC-COLING 2024. [[code]](https://github.com/FloatAI/humaneval-xl) [[data]](https://huggingface.co/datasets/FloatAI/humaneval-xl)",description:"",section:"News"},{id:"news-gilot-https-icml-cc-virtual-2024-poster-32996-on-explainability-for-llms-accepted-to-icml-2024",title:"[GiLOT](https://icml.cc/virtual/2024/poster/32996) on explainability for LLMs accepted to ICML 2024.",description:"",section:"News"},{id:"news-pixelgpt-https-aclanthology-org-2024-emnlp-main-182-gptfluence-https-aclanthology-org-2024-emnlp-main-183-and-tkeval-https-aclanthology-org-2024-findings-emnlp-86-accepted-to-emnlp-2024",title:"[PixelGPT](https://aclanthology.org/2024.emnlp-main.182), [GPTfluence](https://aclanthology.org/2024.emnlp-main.183), and [TKEval](https://aclanthology.org/2024.findings-emnlp.86) accepted to EMNLP 2024.",description:"",section:"News"},{id:"news-ma-rlhf-https-openreview-net-forum-id-wwxjmyzxfh-accepted-to-iclr-2025-paper-https-openreview-net-pdf-id-wwxjmyzxfh-code-https-github-com-ernie-research-ma-rlhf",title:"[MA-RLHF](https://openreview.net/forum?id=WWXjMYZxfH) accepted to ICLR 2025. [[paper]](https://openreview.net/pdf?id=WWXjMYZxfH) [[code]](https://github.com/ernie-research/MA-RLHF/)",description:"",section:"News"},{id:"news-curiosity-driven-rlhf-https-aclanthology-org-2025-acl-long-1146-accepted-to-acl-2025-code-https-github-com-ernie-research-cd-rlhf",title:"[Curiosity-driven RLHF](https://aclanthology.org/2025.acl-long.1146/) accepted to ACL 2025. [[code]](https://github.com/ernie-research/CD-RLHF/)",description:"",section:"News"},{id:"news-four-papers-accepted-to-emnlp-2025",title:"Four papers accepted to EMNLP 2025.",description:"",section:"News"},{id:"light-theme",title:"Change theme to light",description:"Change the theme of the site to Light",section:"Theme",handler:()=>{setThemeSetting("light")}},{id:"dark-theme",title:"Change theme to dark",description:"Change the theme of the site to Dark",section:"Theme",handler:()=>{setThemeSetting("dark")}},{id:"system-theme",title:"Use system default theme",description:"Change the theme of the site to System Default",section:"Theme",handler:()=>{setThemeSetting("system")}}];</script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
+</pre></td> </tr></tbody></table></code></pre></div></div> <p><img src="/assets/img/blog/attention-nutshell/transformer.png" alt="Transformer architecture"></p> <h3 id="relative-position-representations-rpr">Relative Position Representations (RPR)</h3> <p>Shaw et al.<sup id="fnref:14"><a href="#fn:14" class="footnote" rel="footnote" role="doc-noteref">6</a></sup> extend self-attention with learned <strong>relative position embeddings</strong> \(a_{ij}^K, a_{ij}^V\):</p> \[e_{ij} = \frac{x_i W^Q (x_j W^K + a_{ij}^K)^\top}{\sqrt{d_k}}, \qquad z_i = \sum_{j=1}^n \alpha_{ij}(x_j W^V + a_{ij}^V)\] <p>Positions beyond a maximum distance $k$ are clipped:</p> \[a_{ij}^K = w^K_{\text{clip}(j-i, k)}, \qquad \text{clip}(x, k) = \max(-k, \min(k, x))\] <p>This allows the model to generalize to unseen sequence lengths while keeping a bounded number of learned parameters (\(2 \times (2k+1) \times d_k\)).</p> <h2 id="references">References</h2> <div class="footnotes" role="doc-endnotes"> <ol> <li id="fn:1"> <p>Sutskever, I., Vinyals, O. and Le, Q.V. <a href="https://papers.nips.cc/paper/5346-sequence-to-sequence-learning-with-neural-networks.pdf" rel="external nofollow noopener" target="_blank">Sequence to Sequence Learning with Neural Networks</a>. NeurIPS 2014. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p> </li> <li id="fn:4"> <p>Cho, K., et al. <a href="https://arxiv.org/abs/1409.1259" rel="external nofollow noopener" target="_blank">On the Properties of Neural Machine Translation: Encoder-Decoder Approaches</a>. SSST@EMNLP 2014. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">↩</a></p> </li> <li id="fn:3"> <p>Bahdanau, D., Cho, K. and Bengio, Y. <a href="https://arxiv.org/abs/1409.0473" rel="external nofollow noopener" target="_blank">Neural Machine Translation by Jointly Learning to Align and Translate</a>. ICLR 2015. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">↩</a> <a href="#fnref:3:1" class="reversefootnote" role="doc-backlink">↩<sup>2</sup></a></p> </li> <li id="fn:5"> <p>Luong, T., Pham, H. and Manning, C.D. <a href="https://arxiv.org/abs/1508.04025" rel="external nofollow noopener" target="_blank">Effective Approaches to Attention-based Neural Machine Translation</a>. EMNLP 2015. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">↩</a> <a href="#fnref:5:1" class="reversefootnote" role="doc-backlink">↩<sup>2</sup></a> <a href="#fnref:5:2" class="reversefootnote" role="doc-backlink">↩<sup>3</sup></a></p> </li> <li id="fn:6"> <p>Vaswani, A., et al. <a href="https://arxiv.org/abs/1706.03762" rel="external nofollow noopener" target="_blank">Attention Is All You Need</a>. NeurIPS 2017. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">↩</a> <a href="#fnref:6:1" class="reversefootnote" role="doc-backlink">↩<sup>2</sup></a></p> </li> <li id="fn:14"> <p>Shaw, P., Uszkoreit, J. and Vaswani, A. <a href="https://arxiv.org/abs/1803.02155" rel="external nofollow noopener" target="_blank">Self-Attention with Relative Position Representations</a>. NAACL 2018. <a href="#fnref:14" class="reversefootnote" role="doc-backlink">↩</a></p> </li> </ol> </div> </div> </article> <br> <hr> <br> <ul class="list-disc pl-8"></ul> <p class="mb-3 mt-8" style="font-size:1.05rem;font-weight:600;">Related Posts</p> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/multimodal-tokenization-with-vector-quantization/">Multimodal Tokenization with Vector Quantization: A Review</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2024/memory-efficient-attention/">Memory-Efficient Attention: MHA vs. MQA vs. GQA vs. MLA</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/position-encoding-in-transformers/">Positional Encoding in Transformers: From Sinusoidal to RoPE</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2022/diffusion-models-math-guide/">Diffusion Models: A Mathematical Guide from Scratch</a> </li> <li class="my-2"> <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2022/efficient-distributed-training/">Efficient Distributed Training: From DP to ZeRO and FlashAttention</a> </li> <div id="giscus_thread" style="max-width: 1100px; margin: 0 auto;"> <script>
+      let giscusTheme = determineComputedTheme();
+      let giscusAttributes = {
+        src: 'https://giscus.app/client.js',
+        'data-repo': 'cyk1337/gh_site',
+        'data-repo-id': 'R_kgDOLQeeAw',
+        'data-category': 'Comments',
+        'data-category-id': 'DIC_kwDOLQeeA84C7FP3',
+        'data-mapping': 'title',
+        'data-strict': '1',
+        'data-reactions-enabled': '1',
+        'data-emit-metadata': '0',
+        'data-input-position': 'bottom',
+        'data-theme': giscusTheme,
+        'data-lang': 'en',
+        crossorigin: 'anonymous',
+        async: '',
+      };
+
+      let giscusScript = document.createElement('script');
+      Object.entries(giscusAttributes).forEach(([key, value]) => giscusScript.setAttribute(key, value));
+      document.getElementById('giscus_thread').appendChild(giscusScript);
+    </script> <noscript>Please enable JavaScript to view the <a href="http://giscus.app/?ref_noscript" rel="external nofollow noopener" target="_blank">comments powered by giscus.</a> </noscript> </div> </div> <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var COLLAPSED_H = '10em';
+    var THRESHOLD = 15;
+
+    document.querySelectorAll('article.post-content div.highlight, article.post-content pre > code').forEach(function (block) {
+      var el = block.closest('div.highlight') || block.closest('pre');
+      if (!el || el.dataset.collapsible) return;
+      el.dataset.collapsible = 'true';
+      var lines = (el.textContent.match(/\n/g) || []).length;
+      if (lines < THRESHOLD) return;
+
+      el.style.maxHeight = COLLAPSED_H;
+      el.style.overflow = 'hidden';
+      el.style.position = 'relative';
+      el.style.transition = 'max-height 0.35s ease';
+
+      var fade = document.createElement('div');
+      fade.style.cssText =
+        'position:absolute;bottom:0;left:0;right:0;height:2.5em;background:linear-gradient(transparent,var(--global-bg-color,#fff) 70%);pointer-events:none;z-index:1;';
+      el.appendChild(fade);
+
+      var btn = document.createElement('div');
+      btn.style.cssText = 'text-align:center;cursor:pointer;padding:4px 0;margin-bottom:1em;';
+      btn.innerHTML = '<span style="font-size:0.7rem;color:var(--global-theme-color,#888);opacity:0.7;user-select:none;">▼ show more</span>';
+      el.parentNode.insertBefore(btn, el.nextSibling);
+
+      var expanded = false;
+      btn.addEventListener('click', function () {
+        expanded = !expanded;
+        if (expanded) {
+          el.style.maxHeight = el.scrollHeight + 'px';
+          fade.style.display = 'none';
+          btn.innerHTML = '<span style="font-size:0.7rem;color:var(--global-theme-color,#888);opacity:0.7;user-select:none;">▲ show less</span>';
+        } else {
+          el.style.maxHeight = COLLAPSED_H;
+          fade.style.display = '';
+          btn.innerHTML = '<span style="font-size:0.7rem;color:var(--global-theme-color,#888);opacity:0.7;user-select:none;">▼ show more</span>';
+        }
+      });
+    });
+  });
+</script> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Yekun Chai. <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> <span id="busuanzi_value_site_uv"></span> visitors. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script type="text/javascript">
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script defer src="/assets/js/bootstrap-toc.min.js?c82ff4de8b0955d6ff14f5b05eed7eb6"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?2836b72a6d8406a635ab166236639ae3"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script src="/assets/js/bibsearch.js?a8796296a5e2f80c5e498cdd51d7761e" type="module"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">
+      window.MathJax = {
+        tex: {
+          tags: 'ams',
+          inlineMath: [
+            ['$', '$'],
+            ['\\(', '\\)'],
+          ],
+          displayMath: [
+            ['$$', '$$'],
+            ['\\[', '\\]'],
+          ],
+          processEscapes: true,
+        },
+      };
+    </script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script type="text/javascript">
+    /*
+     * This JavaScript code has been adapted from the article
+     * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar,
+     * published on the website https://css-tricks.com on the 7th of May, 2014.
+     * Couple of changes were made to the original code to make it compatible
+     * with the `al-foio` theme.
+     */
+    const progressBar = $('#progress');
+    /*
+     * We set up the bar after all elements are done loading.
+     * In some cases, if the images in the page are larger than the intended
+     * size they'll have on the page, they'll be resized via CSS to accomodate
+     * the desired size. This mistake, however, breaks the computations as the
+     * scroll size is computed as soon as the elements finish loading.
+     * To account for this, a minimal delay was introduced before computing the
+     * values.
+     */
+    window.onload = function () {
+      setTimeout(progressBarSetup, 50);
+    };
+    /*
+     * We set up the bar according to the browser.
+     * If the browser supports the progress element we use that.
+     * Otherwise, we resize the bar thru CSS styling
+     */
+    function progressBarSetup() {
+      if ('max' in document.createElement('progress')) {
+        initializeProgressElement();
+        $(document).on('scroll', function () {
+          progressBar.attr({ value: getCurrentScrollPosition() });
+        });
+        $(window).on('resize', initializeProgressElement);
+      } else {
+        resizeProgressBar();
+        $(document).on('scroll', resizeProgressBar);
+        $(window).on('resize', resizeProgressBar);
+      }
+    }
+    /*
+     * The vertical scroll position is the same as the number of pixels that
+     * are hidden from view above the scrollable area. Thus, a value > 0 is
+     * how much the user has scrolled from the top
+     */
+    function getCurrentScrollPosition() {
+      return $(window).scrollTop();
+    }
+
+    function initializeProgressElement() {
+      let navbarHeight = $('#navbar').outerHeight(true);
+      $('body').css({ 'padding-top': navbarHeight });
+      $('progress-container').css({ 'padding-top': navbarHeight });
+      progressBar.css({ top: navbarHeight });
+      progressBar.attr({
+        max: getDistanceToScroll(),
+        value: getCurrentScrollPosition(),
+      });
+    }
+    /*
+     * The offset between the html document height and the browser viewport
+     * height will be greater than zero if vertical scroll is possible.
+     * This is the distance the user can scroll
+     */
+    function getDistanceToScroll() {
+      return $(document).height() - $(window).height();
+    }
+
+    function resizeProgressBar() {
+      progressBar.css({ width: getWidthPercentage() + '%' });
+    }
+    // The scroll ratio equals the percentage to resize the bar
+    function getWidthPercentage() {
+      return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+    }
+  </script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?601a2d3465e2a52bec38b600518d5f70"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script>
+    let searchTheme = determineComputedTheme();
+    const ninjaKeys = document.querySelector('ninja-keys');
+
+    if (searchTheme === 'dark') {
+      ninjaKeys.classList.add('dark');
+    } else {
+      ninjaKeys.classList.remove('dark');
+    }
+
+    const openSearchModal = () => {
+      // collapse navbarNav if expanded on mobile
+      const $navbarNav = $('#navbarNav');
+      if ($navbarNav.hasClass('show')) {
+        $navbarNav.collapse('hide');
+      }
+      ninjaKeys.open();
+    };
+  </script> <script>
+    // get the ninja-keys element
+    const ninja = document.querySelector('ninja-keys');
+
+    // add the home and posts menu items
+    ninja.data = [{
+        id: "nav-about",
+        title: "About",
+        section: "Navigation",
+        handler: () => {
+          window.location.href = "/";
+        },
+      },{id: "nav-publications",
+              title: "publications",
+              description: "* equal contribution · † corresponding author / project lead · ^ mentored intern or student",
+              section: "Navigation",
+              handler: () => {
+                window.location.href = "/publications/";
+              },
+            },{id: "nav-blog",
+              title: "blog",
+              description: "",
+              section: "Navigation",
+              handler: () => {
+                window.location.href = "/blog/";
+              },
+            },{id: "post-multimodal-tokenization-with-vector-quantization-a-review",
+          
+            title: "Multimodal Tokenization with Vector Quantization: A Review",
+          
+          description: "From VQ-VAE to lookup-free quantization—a systematic review of codebook learning, residual/hierarchical quantization, and generation architectures for multimodal tokenization.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2024/multimodal-tokenization-with-vector-quantization/";
+            
+          },
+        },{id: "post-memory-efficient-attention-mha-vs-mqa-vs-gqa-vs-mla",
+          
+            title: "Memory-Efficient Attention: MHA vs. MQA vs. GQA vs. MLA",
+          
+          description: "Efficient attention variants (MHA, MQA, GQA, MLA)—memory, speed, and expressivity trade-offs for scaling transformers.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2024/memory-efficient-attention/";
+            
+          },
+        },{id: "post-positional-encoding-in-transformers-from-sinusoidal-to-rope",
+          
+            title: "Positional Encoding in Transformers: From Sinusoidal to RoPE",
+          
+          description: "A survey of positional encoding in transformers—sinusoidal PE, RoPE, T5 bias, ALiBi, KERPLE, xPos, Sandwich, interpolation, and NTK-scaled RoPE—with implementations and references.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2023/position-encoding-in-transformers/";
+            
+          },
+        },{id: "post-diffusion-models-a-mathematical-guide-from-scratch",
+          
+            title: "Diffusion Models: A Mathematical Guide from Scratch",
+          
+          description: "A mathematical walkthrough of Gaussian and categorical diffusion—from forward noise, reverse denoising, and ELBO to classifier guidance and discrete D3PM.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2022/diffusion-models-math-guide/";
+            
+          },
+        },{id: "post-efficient-distributed-training-from-dp-to-zero-and-flashattention",
+          
+            title: "Efficient Distributed Training: From DP to ZeRO and FlashAttention",
+          
+          description: "A practical guide to distributed training—data/tensor/pipeline/sequence parallelism, ZeRO, FSDP, mixed precision, and FlashAttention—with formulations and implementations.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2022/efficient-distributed-training/";
+            
+          },
+        },{id: "post-masking-strategies-for-pre-trained-language-models-from-mlm-to-t5",
+          
+            title: "Masking Strategies for Pre-trained Language Models: From MLM to T5",
+          
+          description: "A comprehensive survey of masking and denoising strategies in pre-training—BERT&#39;s MLM (static vs. dynamic), whole-word masking, SpanBERT&#39;s geometric span masking, MASS, BART&#39;s corruption zoo, and T5&#39;s sentinel-based span corruption.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2022/masking-strategies-for-pre-trained-models/";
+            
+          },
+        },{id: "post-subword-tokenization-in-nlp-bpe-wordpiece-and-unigram",
+          
+            title: "Subword Tokenization in NLP: BPE, WordPiece, and Unigram",
+          
+          description: "A comprehensive guide to subword tokenization—BPE, Byte-level BPE, WordPiece, and Unigram LM—with algorithms, implementations (GPT-2, tiktoken, BERT, SentencePiece), and empirical comparisons.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2021/subword-tokenization-in-nlp/";
+            
+          },
+        },{id: "post-bertology-from-xlnet-to-electra",
+          
+            title: "BERTology: From XLNet to ELECTRA",
+          
+          description: "A technical deep-dive into BERT-era pre-training innovations—XLNet&#39;s permutation LM, two-stream attention, RoBERTa&#39;s training recipe, SpanBERT&#39;s boundary objective, ALBERT&#39;s parameter efficiency, and ELECTRA&#39;s replaced token detection.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2019/bertology-from-xlnet-to-electra/";
+            
+          },
+        },{id: "post-normalization-in-neural-networks-bn-ln-rmsnorm-and-beyond",
+          
+            title: "Normalization in Neural Networks: BN, LN, RMSNorm, and Beyond",
+          
+          description: "From Batch Normalization to RMSNorm—a systematic comparison of normalization techniques (BN, LN, IN, GN, SN) with formulations, implementations, and practical guidance for modern deep learning.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2019/normalization-in-neural-networks/";
+            
+          },
+        },{id: "post-attention-mechanisms-and-the-transformer-architecture",
+          
+            title: "Attention Mechanisms and the Transformer Architecture",
+          
+          description: "From seq2seq bottlenecks to self-attention—a systematic walkthrough of additive attention, scaled dot-product attention, multi-head attention, the Transformer encoder-decoder, positional encoding, and relative position representations, with complete PyTorch implementations.",
+          section: "Posts",
+          handler: () => {
+            
+              window.location.href = "/blog/2019/attention-mechanisms-and-transformer/";
+            
+          },
+        },{id: "news-ernie-bot-https-yiyan-baidu-com-released",
+              title: "[ERNIE Bot](https://yiyan.baidu.com/) released.",
+              description: "",
+              section: "News",},{id: "news-ernie-code-https-aclanthology-org-2023-findings-acl-676-on-multilingual-code-pre-training-accepted-to-acl-2023-findings-code-https-github-com-paddlepaddle-paddlenlp-blob-v2-8-1-model-zoo-ernie-code-readme-en-md-models-https-huggingface-co-baidu-ernie-code-560m",
+              title: "[ERNIE-Code](https://aclanthology.org/2023.findings-acl.676) on multilingual code pre-training accepted to ACL 2023 Findings. [[code]](https://github.com/PaddlePaddle/PaddleNLP/blob/v2.8.1/model_zoo/ernie-code/README.en.md) [[models]](https://huggingface.co/baidu/ernie-code-560m)",
+              description: "",
+              section: "News",},{id: "news-m4-https-openreview-net-forum-id-6zcfrsz98y-on-xai-benchmarking-accepted-to-neurips-2023-d-amp-b-track-code-https-github-com-paddlepaddle-interpretdl",
+              title: "[M4](https://openreview.net/forum?id=6zcfrSz98y) on XAI benchmarking accepted to NeurIPS 2023 D&amp;B track. [[code]](https://github.com/PaddlePaddle/InterpretDL/)",
+              description: "",
+              section: "News",},{id: "news-tool-augmented-reward-modeling-https-openreview-net-forum-id-d94x0gwtux-accepted-to-iclr-2024-as-spotlight-paper-https-openreview-net-pdf-id-d94x0gwtux-code-https-github-com-ernie-research-tool-augmented-reward-model",
+              title: "[Tool-augmented reward modeling](https://openreview.net/forum?id=d94x0gWTUX) accepted to ICLR 2024 as spotlight. [[paper]](https://openreview.net/pdf?id=d94x0gWTUX) [[code]](https://github.com/ernie-research/Tool-Augmented-Reward-Model/)",
+              description: "",
+              section: "News",},{id: "news-humaneval-xl-https-arxiv-org-abs-2402-16694-a-multilingual-code-generation-benchmark-accepted-to-lrec-coling-2024-code-https-github-com-floatai-humaneval-xl-data-https-huggingface-co-datasets-floatai-humaneval-xl",
+              title: "[HumanEval-XL](https://arxiv.org/abs/2402.16694), a multilingual code generation benchmark, accepted to LREC-COLING 2024. [[code]](https://github.com/FloatAI/humaneval-xl) [[data]](https://huggingface.co/datasets/FloatAI/humaneval-xl)",
+              description: "",
+              section: "News",},{id: "news-gilot-https-icml-cc-virtual-2024-poster-32996-on-explainability-for-llms-accepted-to-icml-2024",
+              title: "[GiLOT](https://icml.cc/virtual/2024/poster/32996) on explainability for LLMs accepted to ICML 2024.",
+              description: "",
+              section: "News",},{id: "news-pixelgpt-https-aclanthology-org-2024-emnlp-main-182-gptfluence-https-aclanthology-org-2024-emnlp-main-183-and-tkeval-https-aclanthology-org-2024-findings-emnlp-86-accepted-to-emnlp-2024",
+              title: "[PixelGPT](https://aclanthology.org/2024.emnlp-main.182), [GPTfluence](https://aclanthology.org/2024.emnlp-main.183), and [TKEval](https://aclanthology.org/2024.findings-emnlp.86) accepted to EMNLP 2024.",
+              description: "",
+              section: "News",},{id: "news-ma-rlhf-https-openreview-net-forum-id-wwxjmyzxfh-accepted-to-iclr-2025-paper-https-openreview-net-pdf-id-wwxjmyzxfh-code-https-github-com-ernie-research-ma-rlhf",
+              title: "[MA-RLHF](https://openreview.net/forum?id=WWXjMYZxfH) accepted to ICLR 2025. [[paper]](https://openreview.net/pdf?id=WWXjMYZxfH) [[code]](https://github.com/ernie-research/MA-RLHF/)",
+              description: "",
+              section: "News",},{id: "news-curiosity-driven-rlhf-https-aclanthology-org-2025-acl-long-1146-accepted-to-acl-2025-code-https-github-com-ernie-research-cd-rlhf",
+              title: "[Curiosity-driven RLHF](https://aclanthology.org/2025.acl-long.1146/) accepted to ACL 2025. [[code]](https://github.com/ernie-research/CD-RLHF/)",
+              description: "",
+              section: "News",},{id: "news-four-papers-accepted-to-emnlp-2025",
+              title: "Four papers accepted to EMNLP 2025.",
+              description: "",
+              section: "News",},{
+          id: 'light-theme',
+          title: 'Change theme to light',
+          description: 'Change the theme of the site to Light',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("light");
+          },
+        },
+        {
+          id: 'dark-theme',
+          title: 'Change theme to dark',
+          description: 'Change the theme of the site to Dark',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("dark");
+          },
+        },
+        {
+          id: 'system-theme',
+          title: 'Use system default theme',
+          description: 'Change the theme of the site to System Default',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("system");
+          },
+        },];
+  </script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
